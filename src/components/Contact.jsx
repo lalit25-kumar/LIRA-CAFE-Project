@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import "./Contact.css";
 import { TypeAnimation } from "react-type-animation";
 import {
@@ -8,16 +9,50 @@ import {
 } from "react-icons/fa6";
 
 function Contact() {
+  const [animateHeading, setAnimateHeading] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const contactSection = document.getElementById("contact");
+
+      if (contactSection) {
+        const sectionTop = contactSection.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+
+        if (sectionTop < windowHeight - 150 && sectionTop > -300) {
+          setAnimateHeading(false);
+
+          setTimeout(() => {
+            setAnimateHeading(true);
+          }, 80);
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <section className="contact-section" id="contact">
       <div className="contact-container">
-        {/* Left side content */}
         <div className="contact-content">
           <p className="contact-tag">Stay Connected</p>
 
-          <h2 className="contact-heading">Visit Lira Cafe Today</h2>
-          
-          {/* Animated line */}
+          <h2
+            className={
+              animateHeading
+                ? "contact-heading heading-active"
+                : "contact-heading"
+            }
+          >
+            Visit Lira Cafe Today
+          </h2>
+
           <div className="cafe-highlight-line">
             <TypeAnimation
               sequence={[
@@ -31,7 +66,6 @@ function Contact() {
             />
           </div>
 
-          {/* Typing description text */}
           <div className="contact-text">
             <TypeAnimation
               sequence={[
@@ -45,7 +79,6 @@ function Contact() {
             />
           </div>
 
-          {/* Opening hours */}
           <div className="opening-hours">
             <h3>⏰ Opening Hours</h3>
 
@@ -56,7 +89,6 @@ function Contact() {
           </div>
         </div>
 
-        {/* Right side cards */}
         <div className="contact-cards">
           <a
             href="https://maps.app.goo.gl/TAod4pAAkDgXM9jy9"
