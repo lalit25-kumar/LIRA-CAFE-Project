@@ -1,6 +1,37 @@
+import { useEffect, useState } from "react";
 import "./Menu.css";
+import { TypeAnimation } from "react-type-animation";
 
 function Menu() {
+  const [showTyping, setShowTyping] = useState(false);
+
+useEffect(() => {
+  const handleScroll = () => {
+    const menuSection = document.getElementById("menu");
+
+    if (menuSection) {
+      const sectionTop = menuSection.getBoundingClientRect().top;
+      const windowHeight = window.innerHeight;
+
+      if (sectionTop < windowHeight - 150 && sectionTop > -300) {
+        setShowTyping(false);
+
+        setTimeout(() => {
+          setShowTyping(true);
+        }, 80);
+      }
+    }
+  };
+
+  window.addEventListener("scroll", handleScroll);
+
+  handleScroll();
+
+  return () => {
+    window.removeEventListener("scroll", handleScroll);
+  };
+}, []);
+
   const menuItems = [
     {
       name: "Cappuccino",

@@ -33,6 +33,7 @@
   max-width: 680px;
   margin: 0 auto 55px;
   line-height: 1.7;
+  min-height: 35px;
 }
 
 .menu-grid {
