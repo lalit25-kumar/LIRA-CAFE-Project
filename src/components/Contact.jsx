@@ -16,7 +16,7 @@ function Contact() {
           <p className="contact-tag">Stay Connected</p>
 
           <h2 className="contact-heading">Visit Lira Cafe Today</h2>
-
+          
           {/* Animated line */}
           <div className="cafe-highlight-line">
             <TypeAnimation
