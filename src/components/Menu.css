@@ -18,6 +18,7 @@
   letter-spacing: 2px;
   text-transform: uppercase;
   margin-bottom: 14px;
+   animation: pulseText 2.5s ease-in-out infinite;
 }
 
 .menu-container h2 {

@@ -17,11 +17,7 @@
   letter-spacing: 2px;
   text-transform: uppercase;
   margin-bottom: 14px;
-  transition: all 0.3s ease;
-}
-
-.intro-small-title:hover {
-  letter-spacing: 4px;
+  animation: pulseText 2.5s ease-in-out infinite;
 }
 
 .intro-container h2 {
