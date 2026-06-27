@@ -1,6 +1,32 @@
+import { useEffect, useState } from "react";
 import "./Menu.css";
+import { TypeAnimation } from "react-type-animation";
 
 function Menu() {
+  const [startTyping, setStartTyping] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const menuSection = document.getElementById("menu");
+
+      if (menuSection && !startTyping) {
+        const sectionTop = menuSection.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+
+        if (sectionTop < windowHeight - 150) {
+          setStartTyping(true);
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [startTyping]);
+
   const menuItems = [
     {
       name: "Cappuccino",
@@ -44,19 +70,32 @@ function Menu() {
     <section className="menu-section" id="menu">
       <div className="menu-container">
         <p className="menu-small-title">Our Special Menu</p>
+
         <h2>Popular Items</h2>
+
         <p className="menu-text">
-          Discover our most loved coffee, snacks, and delicious cafe-style food.
+          {startTyping && (
+            <TypeAnimation
+              sequence={[
+                "Discover our most loved coffee, snacks, and delicious cafe-style food.",
+              ]}
+              speed={60}
+              cursor={true}
+              repeat={0}
+            />
+          )}
         </p>
 
         <div className="menu-grid">
           {menuItems.map((item, index) => (
             <div className="menu-card" key={index}>
               <div className="menu-icon">{item.icon}</div>
+
               <div className="menu-info">
                 <h3>{item.name}</h3>
                 <p>{item.desc}</p>
               </div>
+
               <div className="menu-price">{item.price}</div>
             </div>
           ))}
