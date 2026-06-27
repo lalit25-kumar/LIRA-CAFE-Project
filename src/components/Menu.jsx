@@ -3,29 +3,39 @@ import "./Menu.css";
 import { TypeAnimation } from "react-type-animation";
 
 function Menu() {
+  // Ye state batayegi typing effect start hua ya nahi
   const [startTyping, setStartTyping] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       const menuSection = document.getElementById("menu");
 
-      if (menuSection && !startTyping) {
+      if (menuSection) {
         const sectionTop = menuSection.getBoundingClientRect().top;
+        const sectionBottom = menuSection.getBoundingClientRect().bottom;
         const windowHeight = window.innerHeight;
 
-        if (sectionTop < windowHeight - 150) {
+        // Jab Menu section screen me aayega tab typing effect start hoga
+        if (sectionTop < windowHeight - 150 && sectionBottom > 150) {
           setStartTyping(true);
+        } else {
+          // Section screen se bahar gaya to reset ho jayega
+          setStartTyping(false);
         }
       }
     };
 
+    // Scroll hone par check karega
     window.addEventListener("scroll", handleScroll);
+
+    // Page reload hone par bhi check karega
     handleScroll();
 
+    // Component remove hone par listener remove ho jayega
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [startTyping]);
+  }, []);
 
   const menuItems = [
     {
@@ -74,8 +84,10 @@ function Menu() {
         <h2>Popular Items</h2>
 
         <p className="menu-text">
+          {/* Menu section me enter karte hi typing effect start hoga */}
           {startTyping && (
             <TypeAnimation
+              key={startTyping}
               sequence={[
                 "Discover our most loved coffee, snacks, and delicious cafe-style food.",
               ]}

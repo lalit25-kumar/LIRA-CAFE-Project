@@ -1,6 +1,42 @@
+import { useEffect, useState } from "react";
 import "./WhyChoose.css";
+import { TypeAnimation } from "react-type-animation";
 
 function WhyChoose() {
+  // Ye state batayegi typing effect start hua ya nahi
+  const [startTyping, setStartTyping] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const whySection = document.getElementById("whychoose");
+
+      if (whySection) {
+        const sectionTop = whySection.getBoundingClientRect().top;
+        const sectionBottom = whySection.getBoundingClientRect().bottom;
+        const windowHeight = window.innerHeight;
+
+        // Jab section screen me aayega tab typing effect start hoga
+        if (sectionTop < windowHeight - 150 && sectionBottom > 150) {
+          setStartTyping(true);
+        } else {
+          // Section se bahar jaate hi typing reset ho jayegi
+          setStartTyping(false);
+        }
+      }
+    };
+
+    // Scroll hone par check karega
+    window.addEventListener("scroll", handleScroll);
+
+    // Reload hone par bhi check karega
+    handleScroll();
+
+    // Component remove hone par listener remove ho jayega
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <section className="why-choose-section" id="whychoose">
       <div className="why-container">
@@ -10,8 +46,18 @@ function WhyChoose() {
         <h2>Experience The Best Of Lira Cafe</h2>
 
         <p className="why-text">
-          We bring together premium coffee, delicious food and a relaxing
-          atmosphere to create unforgettable moments for every guest.
+          {/* Section me aate hi typing effect chalega */}
+          {startTyping && (
+            <TypeAnimation
+              key={startTyping}
+              sequence={[
+                "We bring together premium coffee, delicious food and a relaxing atmosphere to create unforgettable moments for every guest.",
+              ]}
+              speed={60}
+              cursor={true}
+              repeat={0}
+            />
+          )}
         </p>
 
         <div className="why-grid">
