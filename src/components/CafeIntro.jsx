@@ -3,8 +3,11 @@ import "./CafeIntro.css";
 import { TypeAnimation } from "react-type-animation";
 
 function CafeIntro() {
-  // Ye state batayegi typing effect start karna hai ya nahi
+  // Ye state typing effect ko start/stop karegi
   const [startTyping, setStartTyping] = useState(false);
+
+  // Ye state heading animation ko start/stop karegi
+  const [animateHeading, setAnimateHeading] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,20 +18,22 @@ function CafeIntro() {
         const sectionBottom = introSection.getBoundingClientRect().bottom;
         const windowHeight = window.innerHeight;
 
-        // Jab section screen ke andar aaye tab typing start hogi
+        // Jab About section screen me dikhega tab dono effects start honge
         if (sectionTop < windowHeight - 150 && sectionBottom > 150) {
           setStartTyping(true);
+          setAnimateHeading(true);
         } else {
-          // Jab section screen se bahar chala jaye tab reset ho jayega
+          // Section se bahar jaate hi dono effects reset ho jayenge
           setStartTyping(false);
+          setAnimateHeading(false);
         }
       }
     };
 
-    // Scroll karne par check hoga ki section screen me hai ya nahi
+    // Scroll par check karega section visible hai ya nahi
     window.addEventListener("scroll", handleScroll);
 
-    // Reload ya direct section visible hone par bhi check karega
+    // Page reload hone par bhi check karega
     handleScroll();
 
     // Component remove hone par event listener remove ho jayega
@@ -42,10 +47,18 @@ function CafeIntro() {
       <div className="intro-container">
         <p className="intro-small-title">Welcome to Lira Cafe</p>
 
-        <h2>Where Coffee Meets Comfort</h2>
+        <h2
+          className={
+            animateHeading
+              ? "intro-heading heading-active"
+              : "intro-heading"
+          }
+        >
+          Where Coffee Meets Comfort
+        </h2>
 
         <p className="intro-text">
-          {/* Section screen me aate hi ye typing effect chalega */}
+          {/* Section screen me aate hi typing effect chalega */}
           {startTyping && (
             <TypeAnimation
               key={startTyping}

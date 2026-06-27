@@ -21,13 +21,23 @@
   letter-spacing: 2px;
   text-transform: uppercase;
   margin-bottom: 15px;
-   animation: pulseText 2.5s ease-in-out infinite;
+  animation: pulseText 2.5s ease-in-out infinite;
 }
 
-.why-container h2 {
+/* Heading ke liye animation */
+.why-heading {
   font-size: 48px;
   color: #2b160c;
   margin-bottom: 20px;
+
+  /* Starting me heading hidden + thodi niche rahegi */
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+/* Jab section screen me aayega tab heading animation chalegi */
+.heading-active {
+  animation: slideUp 1s ease forwards;
 }
 
 .why-text {
@@ -90,23 +100,50 @@
   font-size: 15px;
 }
 
+/* Heading slide up animation */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Small title ke liye pulse animation */
+@keyframes pulseText {
+  0% {
+    letter-spacing: 2px;
+    opacity: 0.75;
+  }
+
+  50% {
+    letter-spacing: 4px;
+    opacity: 1;
+  }
+
+  100% {
+    letter-spacing: 2px;
+    opacity: 0.75;
+  }
+}
+
 /* Tablet */
-
 @media (max-width: 992px) {
-
   .why-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .why-container h2 {
+  .why-heading {
     font-size: 38px;
   }
 }
 
 /* Mobile */
-
 @media (max-width: 768px) {
-
   .why-choose-section {
     padding: 80px 5%;
   }
@@ -115,7 +152,7 @@
     grid-template-columns: 1fr;
   }
 
-  .why-container h2 {
+  .why-heading {
     font-size: 32px;
   }
 

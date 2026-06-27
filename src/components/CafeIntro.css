@@ -20,15 +20,25 @@
   animation: pulseText 2.5s ease-in-out infinite;
 }
 
-.intro-container h2 {
+/* Heading ke liye animation */
+.intro-heading {
   font-size: 46px;
   color: #2b160c;
   margin-bottom: 20px;
   transition: all 0.3s ease;
+
+  /* Starting me heading hidden + thodi niche rahegi */
+  opacity: 0;
+  transform: translateY(40px);
 }
 
-.intro-container h2:hover {
+.intro-heading:hover {
   color: #b56b2c;
+}
+
+/* Jab section screen me aayega tab ye class add hogi */
+.heading-active {
+  animation: slideUp 1s ease forwards;
 }
 
 .intro-text {
@@ -107,9 +117,40 @@
   color: #b56b2c;
 }
 
+/* Heading slide up animation */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Small title ke liye pulse animation */
+@keyframes pulseText {
+  0% {
+    letter-spacing: 2px;
+    opacity: 0.75;
+  }
+
+  50% {
+    letter-spacing: 4px;
+    opacity: 1;
+  }
+
+  100% {
+    letter-spacing: 2px;
+    opacity: 0.75;
+  }
+}
+
 /* Tablet */
 @media (max-width: 992px) {
-  .intro-container h2 {
+  .intro-heading {
     font-size: 38px;
   }
 
@@ -124,7 +165,7 @@
     padding: 80px 5%;
   }
 
-  .intro-container h2 {
+  .intro-heading {
     font-size: 32px;
   }
 
@@ -152,7 +193,7 @@
 
 /* Small Mobile */
 @media (max-width: 480px) {
-  .intro-container h2 {
+  .intro-heading {
     font-size: 28px;
   }
 

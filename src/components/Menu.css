@@ -18,14 +18,27 @@
   letter-spacing: 2px;
   text-transform: uppercase;
   margin-bottom: 14px;
-   animation: pulseText 2.5s ease-in-out infinite;
+  animation: pulseText 2.5s ease-in-out infinite;
 }
 
-.menu-container h2 {
+/* ========= Heading Animation ========= */
+
+/* Heading pehle hidden rahegi */
+.menu-heading {
   color: #ffffff;
   font-size: 46px;
   margin-bottom: 18px;
+
+  opacity: 0;
+  transform: translateY(40px);
 }
+
+/* Jab Menu section screen me aayega tab ye animation chalegi */
+.heading-active {
+  animation: slideUp 1s ease forwards;
+}
+
+/* ===================================== */
 
 .menu-text {
   color: #d8c4b4;
@@ -60,7 +73,11 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(244, 194, 122, 0.18), transparent);
+  background: linear-gradient(
+    135deg,
+    rgba(244, 194, 122, 0.18),
+    transparent
+  );
   opacity: 0;
   transition: 0.4s ease;
 }
@@ -117,13 +134,47 @@
   z-index: 1;
 }
 
-/* Mobile */
+/* ========= Heading Animation ========= */
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Small title ke liye animation */
+@keyframes pulseText {
+  0% {
+    letter-spacing: 2px;
+    opacity: 0.75;
+  }
+
+  50% {
+    letter-spacing: 4px;
+    opacity: 1;
+  }
+
+  100% {
+    letter-spacing: 2px;
+    opacity: 0.75;
+  }
+}
+
+/* ===================================== */
+
+/* Tablet */
 @media (max-width: 768px) {
   .menu-section {
     padding: 80px 5%;
   }
 
-  .menu-container h2 {
+  .menu-heading {
     font-size: 34px;
   }
 
@@ -141,6 +192,7 @@
   }
 }
 
+/* Mobile */
 @media (max-width: 480px) {
   .menu-card {
     flex-direction: column;

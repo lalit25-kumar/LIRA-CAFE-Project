@@ -3,8 +3,11 @@ import "./Menu.css";
 import { TypeAnimation } from "react-type-animation";
 
 function Menu() {
-  // Ye state batayegi typing effect start hua ya nahi
+  // Ye state typing effect ko start/stop karegi
   const [startTyping, setStartTyping] = useState(false);
+
+  // Ye state heading animation ko start/stop karegi
+  const [animateHeading, setAnimateHeading] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,23 +18,25 @@ function Menu() {
         const sectionBottom = menuSection.getBoundingClientRect().bottom;
         const windowHeight = window.innerHeight;
 
-        // Jab Menu section screen me aayega tab typing effect start hoga
+        // Jab Menu section screen me dikhega tab dono effects start honge
         if (sectionTop < windowHeight - 150 && sectionBottom > 150) {
           setStartTyping(true);
+          setAnimateHeading(true);
         } else {
-          // Section screen se bahar gaya to reset ho jayega
+          // Section se bahar jaate hi dono effects reset ho jayenge
           setStartTyping(false);
+          setAnimateHeading(false);
         }
       }
     };
 
-    // Scroll hone par check karega
+    // Scroll par check karega section visible hai ya nahi
     window.addEventListener("scroll", handleScroll);
 
     // Page reload hone par bhi check karega
     handleScroll();
 
-    // Component remove hone par listener remove ho jayega
+    // Component remove hone par event listener remove ho jayega
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
@@ -81,10 +86,12 @@ function Menu() {
       <div className="menu-container">
         <p className="menu-small-title">Our Special Menu</p>
 
-        <h2>Popular Items</h2>
+        <h2 className={animateHeading ? "menu-heading heading-active" : "menu-heading"}>
+          Popular Items
+        </h2>
 
         <p className="menu-text">
-          {/* Menu section me enter karte hi typing effect start hoga */}
+          {/* Menu section me aate hi typing effect start hoga */}
           {startTyping && (
             <TypeAnimation
               key={startTyping}

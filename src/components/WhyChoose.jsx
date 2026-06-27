@@ -3,8 +3,11 @@ import "./WhyChoose.css";
 import { TypeAnimation } from "react-type-animation";
 
 function WhyChoose() {
-  // Ye state batayegi typing effect start hua ya nahi
+  // Ye state typing effect ko start/stop karegi
   const [startTyping, setStartTyping] = useState(false);
+
+  // Ye state heading animation ko start/stop karegi
+  const [animateHeading, setAnimateHeading] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,23 +18,25 @@ function WhyChoose() {
         const sectionBottom = whySection.getBoundingClientRect().bottom;
         const windowHeight = window.innerHeight;
 
-        // Jab section screen me aayega tab typing effect start hoga
+        // Jab Why Choose section screen me dikhega tab dono effects start honge
         if (sectionTop < windowHeight - 150 && sectionBottom > 150) {
           setStartTyping(true);
+          setAnimateHeading(true);
         } else {
-          // Section se bahar jaate hi typing reset ho jayegi
+          // Section se bahar jaate hi dono effects reset ho jayenge
           setStartTyping(false);
+          setAnimateHeading(false);
         }
       }
     };
 
-    // Scroll hone par check karega
+    // Scroll hone par section visible hai ya nahi check hoga
     window.addEventListener("scroll", handleScroll);
 
-    // Reload hone par bhi check karega
+    // Page reload hone par bhi ye function ek baar chalega
     handleScroll();
 
-    // Component remove hone par listener remove ho jayega
+    // Component remove hone par event listener remove ho jayega
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
@@ -40,10 +45,15 @@ function WhyChoose() {
   return (
     <section className="why-choose-section" id="whychoose">
       <div className="why-container">
-
         <p className="why-small-title">Why Choose Us</p>
 
-        <h2>Experience The Best Of Lira Cafe</h2>
+        <h2
+          className={
+            animateHeading ? "why-heading heading-active" : "why-heading"
+          }
+        >
+          Experience The Best Of Lira Cafe
+        </h2>
 
         <p className="why-text">
           {/* Section me aate hi typing effect chalega */}
@@ -61,7 +71,6 @@ function WhyChoose() {
         </p>
 
         <div className="why-grid">
-
           <div className="why-card">
             <div className="why-icon">☕</div>
             <h3>Premium Coffee</h3>
@@ -93,9 +102,7 @@ function WhyChoose() {
               A welcoming space where friends and families create memories together.
             </p>
           </div>
-
         </div>
-
       </div>
     </section>
   );
