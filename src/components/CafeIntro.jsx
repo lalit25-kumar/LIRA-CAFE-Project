@@ -3,36 +3,39 @@ import "./CafeIntro.css";
 import { TypeAnimation } from "react-type-animation";
 
 function CafeIntro() {
-  // Ye state batayegi ki typing effect start hua ya nahi
+  // Ye state batayegi typing effect start karna hai ya nahi
   const [startTyping, setStartTyping] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       const introSection = document.getElementById("about");
 
-      // Agar section mil gaya aur typing abhi start nahi hui hai
-      if (introSection && !startTyping) {
+      if (introSection) {
         const sectionTop = introSection.getBoundingClientRect().top;
+        const sectionBottom = introSection.getBoundingClientRect().bottom;
         const windowHeight = window.innerHeight;
 
-        // Jab about section screen me aayega tab typing effect start hoga
-        if (sectionTop < windowHeight - 150) {
+        // Jab section screen ke andar aaye tab typing start hogi
+        if (sectionTop < windowHeight - 150 && sectionBottom > 150) {
           setStartTyping(true);
+        } else {
+          // Jab section screen se bahar chala jaye tab reset ho jayega
+          setStartTyping(false);
         }
       }
     };
 
-    // Scroll hone par function chalega
+    // Scroll karne par check hoga ki section screen me hai ya nahi
     window.addEventListener("scroll", handleScroll);
 
-    // Page reload hone par agar section already visible hai toh typing start hogi
+    // Reload ya direct section visible hone par bhi check karega
     handleScroll();
 
-    // Component remove hone par scroll listener remove ho jayega
+    // Component remove hone par event listener remove ho jayega
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [startTyping]);
+  }, []);
 
   return (
     <section className="cafe-intro" id="about">
@@ -42,9 +45,10 @@ function CafeIntro() {
         <h2>Where Coffee Meets Comfort</h2>
 
         <p className="intro-text">
-          {/* Jab section screen me aayega tab hi typing effect start hoga */}
+          {/* Section screen me aate hi ye typing effect chalega */}
           {startTyping && (
             <TypeAnimation
+              key={startTyping}
               sequence={[
                 "Lira Cafe is a cozy place to enjoy fresh coffee, delicious food, and peaceful moments with your friends and family.",
               ]}
