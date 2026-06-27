@@ -9,6 +9,7 @@ import {
 } from "react-icons/fa6";
 
 function Contact() {
+  // Ye state heading animation ko start/stop karne ke kaam aati hai
   const [animateHeading, setAnimateHeading] = useState(false);
 
   useEffect(() => {
@@ -17,21 +18,26 @@ function Contact() {
 
       if (contactSection) {
         const sectionTop = contactSection.getBoundingClientRect().top;
+        const sectionBottom = contactSection.getBoundingClientRect().bottom;
         const windowHeight = window.innerHeight;
 
-        if (sectionTop < windowHeight - 150 && sectionTop > -300) {
+        // Jab contact section screen me aaye tab heading animation start hogi
+        if (sectionTop < windowHeight - 150 && sectionBottom > 150) {
+          setAnimateHeading(true);
+        } else {
+          // Jab contact section screen se bahar jaye tab animation reset ho jayegi
           setAnimateHeading(false);
-
-          setTimeout(() => {
-            setAnimateHeading(true);
-          }, 80);
         }
       }
     };
 
+    // Scroll hone par section check hoga
     window.addEventListener("scroll", handleScroll);
+
+    // Page reload ya direct contact section visible ho to bhi animation chale
     handleScroll();
 
+    // Component remove hone par listener remove ho jayega
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
