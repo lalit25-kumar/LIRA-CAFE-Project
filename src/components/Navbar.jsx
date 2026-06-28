@@ -12,17 +12,18 @@ function Navbar() {
   return (
     <header className="navbar">
       <div className="nav-container">
-        <a href="#home" className="logo-box" onClick={closeMenu}>
+        <a href="/#home" className="logo-box" onClick={closeMenu}>
           <img src={logo} alt="Lira Cafe Logo" />
         </a>
 
         <nav className={menuOpen ? "nav-menu active" : "nav-menu"}>
-          <a href="#home" onClick={closeMenu}>Home</a>
-          <a href="#about" onClick={closeMenu}>About</a>      
-          <a href="#menu" onClick={closeMenu}>Menu</a>
-          <a href="#gallery" onClick={closeMenu}>Gallery</a>
-          <a href="#contact" onClick={closeMenu}>Contact</a>
-          <a href="#book" className="book-btn" onClick={closeMenu}>
+          <a href="/#home" onClick={closeMenu}>Home</a>
+          <a href="/#about" onClick={closeMenu}>About</a>
+          <a href="/#menu" onClick={closeMenu}>Menu</a>
+          <a href="/gallery" onClick={closeMenu}>Gallery</a>
+          <a href="/#contact" onClick={closeMenu}>Contact</a>
+
+          <a href="/#contact" className="book-btn" onClick={closeMenu}>
             Book Table
           </a>
         </nav>

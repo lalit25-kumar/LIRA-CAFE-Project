@@ -1,0 +1,206 @@
+.gallery-page {
+  width: 100%;
+  min-height: 100vh;
+  padding: 120px 6% 80px;
+  background: #fff8ef;
+}
+
+.gallery-hero {
+  text-align: center;
+  max-width: 850px;
+  margin: 0 auto 60px;
+}
+
+.gallery-hero p {
+  color: #b56b2c;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  animation: pulseText 2.5s ease-in-out infinite;
+}
+
+/* Heading animation ke liye */
+.gallery-heading {
+  font-size: 52px;
+  color: #2b160c;
+  margin-bottom: 18px;
+
+  /* Starting me heading hidden + thodi niche rahegi */
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+/* Jab section screen me aayega tab ye animation chalegi */
+.heading-active {
+  animation: slideUp 1s ease forwards;
+}
+
+.gallery-hero span {
+  color: #6b4a35;
+  font-size: 18px;
+  line-height: 1.7;
+  display: block;
+  min-height: 34px;
+}
+
+.gallery-grid {
+  max-width: 1250px;
+  margin: auto;
+  columns: 3 280px;
+  column-gap: 22px;
+}
+
+.gallery-card {
+  position: relative;
+  margin-bottom: 22px;
+  border-radius: 24px;
+  overflow: hidden;
+  cursor: pointer;
+  break-inside: avoid;
+  box-shadow: 0 15px 35px rgba(43, 22, 12, 0.15);
+}
+
+.gallery-card img {
+  width: 100%;
+  display: block;
+  transition: 0.5s ease;
+}
+
+.gallery-card:hover img {
+  transform: scale(1.08);
+}
+
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(43, 22, 12, 0.75), transparent);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 24px;
+  opacity: 0;
+  transition: 0.4s ease;
+}
+
+.gallery-card:hover .gallery-overlay {
+  opacity: 1;
+}
+
+.gallery-overlay h3 {
+  color: #fff;
+  font-size: 24px;
+}
+
+.gallery-overlay p {
+  color: #f4c27a;
+  font-weight: 700;
+}
+
+/* Heading slide-up animation */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Small title pulse animation */
+@keyframes pulseText {
+  0% {
+    letter-spacing: 2px;
+    opacity: 0.75;
+  }
+
+  50% {
+    letter-spacing: 4px;
+    opacity: 1;
+  }
+
+  100% {
+    letter-spacing: 2px;
+    opacity: 0.75;
+  }
+}
+
+/* Tablet */
+@media (max-width: 992px) {
+  .gallery-page {
+    padding: 110px 5% 70px;
+  }
+
+  .gallery-heading {
+    font-size: 42px;
+  }
+
+  .gallery-grid {
+    columns: 2 260px;
+    column-gap: 18px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .gallery-page {
+    padding: 100px 5% 60px;
+  }
+
+  .gallery-hero {
+    margin-bottom: 42px;
+  }
+
+  .gallery-hero p {
+    font-size: 14px;
+    letter-spacing: 2px;
+  }
+
+  .gallery-heading {
+    font-size: 34px;
+  }
+
+  .gallery-hero span {
+    font-size: 16px;
+    min-height: 58px;
+  }
+
+  .gallery-card {
+    border-radius: 18px;
+    margin-bottom: 18px;
+  }
+
+  .gallery-overlay {
+    padding: 18px;
+    opacity: 1;
+  }
+
+  .gallery-overlay h3 {
+    font-size: 20px;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .gallery-page {
+    padding: 90px 4% 50px;
+  }
+
+  .gallery-heading {
+    font-size: 28px;
+    line-height: 1.25;
+  }
+
+  .gallery-hero span {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .gallery-grid {
+    columns: 1;
+  }
+}
